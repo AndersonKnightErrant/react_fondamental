@@ -1,6 +1,6 @@
 import stl from './MyModal.module.css';
 
-const MyModal = ({ children, visible, setVisibile }) => {
+const MyModal = ({ children, visible, setVisible }) => {
   const rootClasses = [stl.myModal]
 	
 	if (visible) {
@@ -9,8 +9,8 @@ const MyModal = ({ children, visible, setVisibile }) => {
 
 	return (
 		
-    <div className={rootClasses.join(' ')}>
-			<div className={stl.myModalContent}>
+    <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
+			<div className={stl.myModalContent} onClick={(e) => e.stopPropagation()}>
 				{children}
 			</div>
     </div>
