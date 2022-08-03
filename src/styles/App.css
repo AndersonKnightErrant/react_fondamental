@@ -22,5 +22,5 @@
 	margin: 15px 0px 0px 0px;
 	justify-content: space-between;
 	align-items: center;
-	max-width: 300px;
+	min-width: 300px;
 }
