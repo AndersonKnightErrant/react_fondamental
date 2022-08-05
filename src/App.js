@@ -11,6 +11,7 @@ import PostService from './components/API/PostService';
 import Loader from './components/UI/Loader/Loader';
 import useFetching from './components/hooks/useFetching';
 import { getPageCount, getPagesArray } from './utils/pages';
+import Pagination from './components/UI/pagination/Pagination';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -20,8 +21,6 @@ function App() {
   const [totalPages, settotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-
-  const pagesArray = getPagesArray(totalPages);
 
   const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
@@ -35,8 +34,6 @@ function App() {
     fetchPosts();
   }, [page]);
 
-  console.log(totalPages);
-
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
     setModal(false);
@@ -45,11 +42,12 @@ function App() {
   // Получаем post из дочернего элемента
   const removePost = (post) => {
     setPosts(posts.filter((p) => p.id !== post.id));
-	};
-	
-	const changePage = (page) => {
-		setPage(page);
-	}
+  };
+
+  const changePage = (page) => {
+    setPage(page);
+    fetchPosts(limit, page);
+  };
 
   return (
     <div className='app'>
@@ -70,16 +68,10 @@ function App() {
       ) : (
         <PostList remove={removePost} posts={sortedAndSearchedPosts} title={'Посты'} />
       )}
-      <div className='page__wrapper'>
-        {pagesArray.map((p) => (
-          <span
-            onClick={() => changePage(p)}
-            key={p}
-            className={page === p ? 'page__current' : 'page'}>
-            {p}
-          </span>
-        ))}
-      </div>
+			<Pagination
+				page={page}
+				changePage={changePage}
+				totalPages={totalPages} />
     </div>
   );
 }
