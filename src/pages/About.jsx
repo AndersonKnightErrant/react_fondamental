@@ -1,6 +1,6 @@
 const About = () => {
 	return (
-		<h1>Проект с демонстрацией загрузки постов @AndersonKnightErrant</h1>
+		<div className="about"><h1>Проект с демонстрацией загрузки постов @AndersonKnightErrant</h1></div>
 	);
 }
 
