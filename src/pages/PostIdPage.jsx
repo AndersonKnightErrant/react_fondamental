@@ -11,6 +11,7 @@ const PostIdPage = () => {
 	const [fetchPostById, isLoading, error] = useFetching(async(id) => {
 		const response = await PostService.getById(id)
 		setPost(response.data);
+		console.log(response.data);
 	})
 
 	useEffect(() => {
@@ -25,6 +26,9 @@ const PostIdPage = () => {
 				? <Loader/>
 				: <div>{post.id}{post.title}</div>
 			}
+			<h1>
+				<p>Комментарии</p>
+			</h1>
 		</div>
 	);
 }
