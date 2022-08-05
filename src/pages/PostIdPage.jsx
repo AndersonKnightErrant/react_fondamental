@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import PostService from '../components/API/PostService';
-import useFetching from '../components/hooks/useFetching';
+import PostService from '../API/PostService';
+import useFetching from '../hooks/useFetching';
 import Loader from '../components/UI/Loader/Loader';
 
 
