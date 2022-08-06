@@ -1,20 +1,26 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Navbar from '../components/UI/Navbar/Navbar';
-import { routes } from '../router';
-
+import { privateRoutes, publicRoutes } from '../router';
 
 const AppRouter = () => {
-  return (
+  const isAuth = true;
+  return isAuth ? (
     <Router>
       <Navbar />
       <Routes>
-				{routes.map(route => 
-					<Route key={route.path}
-						path={route.path}
-						element={<route.element/>}
-					/>
-				)}
+        {privateRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={<route.element />} />
+        ))}
+      </Routes>
+    </Router>
+  ) : (
+    <Router>
+      <Navbar />
+      <Routes>
+        {publicRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={<route.element />} />
+        ))}
       </Routes>
     </Router>
   );
